@@ -151,7 +151,6 @@
     <Compile Include="Common\Responce.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,7 +192,6 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ContactService.cs" />
-    <Compile Include="Service\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -229,7 +227,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\FilterModels\" />
     <Folder Include="Views\Contact\" />
   </ItemGroup>
   <ItemGroup>

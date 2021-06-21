@@ -35,12 +35,11 @@
         $scope.maxsize = 10;
         $scope.totalcount = 0;
         $scope.reverseSort = false;
-        //$scope.regEx = "/^[0-9]*$/";
+        $scope.regEx = new RegExp("^(()?\\d{3}())?(-|\\s)?\\d{3}(-|\\s)?\\d{4}$");
 
         //Contact Details
         $scope.ContactDetails = angular.copy($scope.DefaultContactDetails);
-
-        $scope.regEx = new RegExp("^(()?\\d{3}())?(-|\\s)?\\d{3}(-|\\s)?\\d{4}$");
+        
         //Save Contact Detials
         $scope.SaveContactDetails = function () {
             if (!$scope.regEx.test($scope.ContactDetails.MobileNo)) {
