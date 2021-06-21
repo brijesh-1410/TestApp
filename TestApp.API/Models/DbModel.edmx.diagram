@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c08097c607134bf4b5d20dd6bc80b47f" Name="Diagram1">
+        <EntityTypeShape EntityType="AppDBModel.Student" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AppDBModel.CityMaster" Width="1.5" PointX="8.25" PointY="1" />
+        <EntityTypeShape EntityType="AppDBModel.CountryMaster" Width="1.5" PointX="3.75" PointY="1.125" />
+        <EntityTypeShape EntityType="AppDBModel.StateMaster" Width="1.5" PointX="6" PointY="0.875" />
+        <EntityTypeShape EntityType="AppDBModel.Users" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="AppDBModel.FK_CityMaster_StateMaster" />
+        <AssociationConnector Association="AppDBModel.FK_StateMaster_CountryMaster" />
+        <EntityTypeShape EntityType="AppDBModel.Contacts" Width="1.5" PointX="10.5" PointY="0.75" />
+        <AssociationConnector Association="AppDBModel.FK_Contacts_CityMaster" />
+        <AssociationConnector Association="AppDBModel.FK_Contacts_CountryMaster" />
+        <AssociationConnector Association="AppDBModel.FK_Contacts_StateMaster" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Users";
+}
+
+<h2>User Details</h2>
+
+<div ng-controller="UserCtrl" ng-init="Init()">
+    <form id="userform" name="userForm" ng-submit="SaveUserDetails()">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="txtFirstName">First Name</label>
+                <input type="text" id="txtFirstName" name="txtFirstName" maxlength="40" class="form-control" ng-model="UserDetails.FirstName" required />
+                <span class="field-validation-valid text-danger"
+                      data-valmsg-for="txtFirstName"
+                      data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="col-md-3">
+                <label for="txtLastName">Last Name</label>
+                <input type="text" id="txtLastName" name="txtLastName" maxlength="40" class="form-control" ng-model="UserDetails.LastName" required />
+                <span class="field-validation-valid text-danger"
+                      data-valmsg-for="txtLastName"
+                      data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="col-md-3">
+                <label for="txtUserName">User Name</label>
+                <input type="text" id="txtUserName" name="txtUserName" maxlength="40" class="form-control" ng-model="UserDetails.UserName" required />
+                <span class="field-validation-valid text-danger"
+                      data-valmsg-for="txtUserName"
+                      data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="col-md-3">
+                <label for="txtPassword">Password</label>
+                <input type="password" id="txtPassword" name="txtPassword" maxlength="40" class="form-control" ng-model="UserDetails.Password" required />
+                <span class="field-validation-valid text-danger"
+                      data-valmsg-for="txtPassword"
+                      data-valmsg-replace="true">
+                    (*Min 8 character,Atleast 1 letter,Atleast 1 number)
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="txtEmailId">Email</label>
+                <input type="email" id="txtEmailId" name="txtEmailId" maxlength="40" class="form-control" ng-model="UserDetails.EmailId" required />
+                <span class="field-validation-valid text-danger"
+                      data-valmsg-for="txtEmailId"
+                      data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="col-md-3">
+                <label for="txtMobileNo">Mobile</label>
+                <input type="number" id="txtMobileNo" name="txtMobileNo" size="10" class="form-control" ng-model="UserDetails.MobileNo" required />
+                <span class="field-validation-valid text-danger"
+                      data-valmsg-for="txtMobileNo"
+                      data-valmsg-replace="true">
+                </span>
+            </div>
+            <div class="col-md-1">
+                <label for="chkIsActive"></label>
+                <input type="checkbox" id="chkIsActive" name="chkIsActive" class="form-control" ng-model="UserDetails.IsActive" />
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-1">
+                <input class="btn btn-success" type="submit" value="Submit"/>
+            </div>
+            <div class="col-md-1">
+                <button  class="btn" ng-click="ClearForm()">Clear</button>
+            </div>
+        </div>
+    </form>
+    
+</div>
+
+<script src="~/Angular/Controller/UserCtrl.js"></script>
+<script src="~/Angular/Service/UserService.js"></script>
+
