@@ -1,60 +1,62 @@
-﻿
+﻿@using TestApp.Resource
 @{
     ViewBag.Title = "Contacts";
 }
 <style type="text/css">
     .text-gray {
-        color:gray;
-        text-decoration:solid;
-        text-shadow:1px 1px 1px #808080;
+        color: gray;
+        text-decoration: solid;
+        text-shadow: 1px 1px 1px #808080;
     }
+
     .no-shadow {
         box-shadow: none;
     }
+
     .required {
-        color:red;
+        color: red;
     }
 </style>
-<h3>Contact</h3>
+<h3>@AppResources.Contact</h3>
 <div ng-controller="ContactCtrl" ng-init="Init()">
     <div class="InputForm">
         <form id="contactform" name="contactForm" ng-submit="SaveContactDetails()">
             <div class="row">
                 <div class="col-md-3">
-                    <label for="txtFirstName">First Name</label> <span class="required">*</span>
-                    <input type="text" id="txtFirstName" name="txtFirstName" maxlength="40" class="form-control" ng-model="ContactDetails.FirstName" required />
+                    <label for="txtFirstName">@AppResources.FirstName</label> <span class="required">*</span>
+                    <input type="text" id="txtFirstName" name="txtFirstName" maxlength="40" class="form-control" ng-model="ContactDetails.FirstName" placeholder="@AppResources.FirstName" required />
                 </div>
                 <div class="col-md-3">
-                    <label for="txtLastName">Last Name</label> <span class="required">*</span>
-                    <input type="text" id="txtLastName" name="txtLastName" maxlength="40" class="form-control" ng-model="ContactDetails.LastName" required />
+                    <label for="txtLastName">@AppResources.LastName</label> <span class="required">*</span>
+                    <input type="text" id="txtLastName" name="txtLastName" maxlength="40" class="form-control" ng-model="ContactDetails.LastName" placeholder="@AppResources.LastName" required />
                 </div>
                 <div class="col-md-3">
-                    <label for="txtEmailId">Email</label> <span class="required">*</span>
-                    <input type="email" id="txtEmailId" name="txtEmailId" maxlength="40" class="form-control" ng-model="ContactDetails.EmailId" required />
+                    <label for="txtEmailId">@AppResources.Email</label> <span class="required">*</span>
+                    <input type="email" id="txtEmailId" name="txtEmailId" maxlength="40" class="form-control" ng-model="ContactDetails.EmailId" placeholder="@AppResources.Email" required />
                 </div>
                 <div class="col-md-3">
-                    <label for="txtMobileNo">Mobile Number</label> <span class="required">*</span>
-                    <input type="text" id="txtMobileNo" name="txtMobileNo" maxlength="10" class="form-control" ng-model="ContactDetails.MobileNo" required />
+                    <label for="txtMobileNo">@AppResources.MobileNumber</label> <span class="required">*</span>
+                    <input type="text" id="txtMobileNo" name="txtMobileNo" maxlength="10" class="form-control" ng-model="ContactDetails.MobileNo" placeholder="@AppResources.MobileNumber" required />
                 </div>
             </div>
             <br />
             <div class="row">
                 <div class="col-md-1">
-                    <label for="chkIsActive">Active</label>
+                    <label for="chkIsActive">@AppResources.Active</label>
                     <input type="checkbox" id="chkIsActive" name="chkIsActive" class="form-control no-shadow" ng-model="ContactDetails.IsActive" />
                 </div>
                 <div class="col-md-1">
-                    <label for="chkIsFavourite">Favourite</label>
+                    <label for="chkIsFavourite">@AppResources.Favourite</label>
                     <input type="checkbox" id="chkIsFavourite" name="chkIsFavourite" class="form-control no-shadow" ng-model="ContactDetails.IsFavourite" />
                 </div>
             </div>
             <br />
             <div class="row">
                 <div class="col-md-1">
-                    <input class="btn btn-success" type="submit" value="Submit" />
+                    <input class="btn btn-success" type="submit" value="@AppResources.Submit" />
                 </div>
                 <div class="col-md-1">
-                    <button class="btn" ng-click="ClearForm()">Clear</button>
+                    <button class="btn" ng-click="ClearForm()">@AppResources.Clear</button>
                 </div>
             </div>
         </form>
@@ -62,13 +64,17 @@
     <br />
     <div class="Grid">
         <div class="row" style="margin-bottom:10px">
-            <div class="col-md-7"></div>
+            <div class="col-md-7">
+                <span class="badge bg-info" style="margin-top:10px">
+                    @AppResources.TotalContacts : {{totalcount}}
+                </span>
+            </div>
             <div class="col-md-3">
-                <input type="text" class="form-control" maxlength="30" placeholder="search by Contact no, First name, Last name" ng-model="Param.SearchString" />
+                <input type="text" class="form-control" maxlength="30" placeholder="@AppResources.SearchBy" ng-model="Param.SearchString" />
             </div>
             <div class="col-md-2 pull-right">
-                <a href="#" ng-click="Param.PageIndex = 1;GetContacts()" class="btn btn-info">Search</a>
-                <a href="#" ng-click="Param.SearchString = '';GetContacts()" class="btn btn-default">Clear</a>
+                <a href="#" ng-click="Param.PageIndex = 1;GetContacts()" class="btn btn-info">@AppResources.Search</a>
+                <a href="#" ng-click="Param.SearchString = '';GetContacts()" class="btn btn-default">@AppResources.Clear</a>
             </div>
         </div>
         <div class="row">
@@ -82,48 +88,48 @@
                             <tr>
 
                                 <th ng-click="SortBy('FirstName')">
-                                    First Name
+                                    @AppResources.FirstName
                                     <span ng-show="Param.OrderByField == 'FirstName'" class="text-gray">
                                         <span ng-show="!reverseSort" class="text-gray">^</span>
                                         <span ng-show="reverseSort" class="text-gray">v</span>
                                     </span>
                                 </th>
                                 <th ng-click="SortBy('LastName')">
-                                    Last Name
+                                    @AppResources.LastName
                                     <span ng-show="Param.OrderByField == 'LastName'" class="text-gray">
                                         <span ng-show="!reverseSort" class="text-gray">^</span>
                                         <span ng-show="reverseSort" class="text-gray">v</span>
                                     </span>
                                 </th>
                                 <th ng-click="SortBy('MobileNo')">
-                                    Contact Number
+                                    @AppResources.ContactNumber
                                     <span ng-show="Param.OrderByField == 'MobileNo'" class="text-gray">
                                         <span ng-show="!reverseSort" class="text-gray">^</span>
                                         <span ng-show="reverseSort" class="text-gray">v</span>
                                     </span>
                                 </th>
                                 <th ng-click="SortBy('EmailId')">
-                                    Email
+                                    @AppResources.Email
                                     <span ng-show="Param.OrderByField == 'EmailId'" class="text-gray">
                                         <span ng-show="!reverseSort" class="text-gray">^</span>
                                         <span ng-show="reverseSort" class="text-gray">v</span>
                                     </span>
                                 </th>
                                 <th ng-click="SortBy('IsActive')">
-                                    Active
+                                    @AppResources.Active
                                     <span ng-show="Param.OrderByField == 'IsActive'" class="text-gray">
                                         <span ng-show="!reverseSort" class="text-gray">^</span>
                                         <span ng-show="reverseSort" class="text-gray">v</span>
                                     </span>
                                 </th>
                                 <th ng-click="SortBy('IsFavourite')">
-                                    Favourite
+                                    @AppResources.Favourite
                                     <span ng-show="Param.OrderByField == 'IsFavourite'" class="text-gray">
                                         <span ng-show="!reverseSort" class="text-gray">^</span>
                                         <span ng-show="reverseSort" class="text-gray">v</span>
                                     </span>
                                 </th>
-                                <th>Action</th>
+                                <th>@AppResources.Action</th>
 
                             </tr>
 
@@ -146,14 +152,14 @@
                                 <td><input type="checkbox" class="form-control checkbox-inline no-shadow" ng-model="e.IsFavourite" ng-click="FavouriteContact(e.ContactId,!e.IsFavourite)"></td>
 
                                 <td>
-                                    <button class="btn btn-info" ng-click="EditContact(e.ContactId)">EDIT</button>
-                                    <button class="btn btn-danger" ng-click="DeleteContactDetails(e.ContactId)">DELETE</button>
+                                    <button class="btn btn-info" ng-click="EditContact(e.ContactId)">@AppResources.EDIT</button>
+                                    <button class="btn btn-danger" ng-click="DeleteContactDetails(e.ContactId)">@AppResources.DELETE</button>
                                 </td>
                             </tr>
 
                             <tr ng-if="ContactData.length == 0">
                                 <td colspan="7" class="text-center">
-                                    No Data Found
+                                    @AppResources.NoDataFound
                                 </td>
                             </tr>
 
@@ -191,13 +197,13 @@
                                     </div>
 
                                     @*<div class="pull-right">
-                                        <div data-pagination="ContactData"
-                                             data-num-pages="numPages"
-                                             data-current-page="Param.PageIndex"
-                                             data-max-size="maxsize"
-                                             data-boundary-links="true">
-                                        </div>
-                                    </div>*@
+                                            <div data-pagination="ContactData"
+                                                 data-num-pages="numPages"
+                                                 data-current-page="Param.PageIndex"
+                                                 data-max-size="maxsize"
+                                                 data-boundary-links="true">
+                                            </div>
+                                        </div>*@
                                 </td>
 
                             </tr>
@@ -211,6 +217,11 @@
     </div>
 </div>
 
-<script src="~/Angular/Controller/ContactCtrl.js"></script>
-<script src="~/Angular/Service/ContactService.js"></script>
+@Scripts.Render("~/bundles/Contact")
+
+<script>
+    var SomethingWentWrongMessage = '@AppResources.SomethingWentWrongMessage';
+    var InvalidMobileNumber = '@AppResources.InvalidMobileNumber';
+    var NoContactSelected = '@AppResources.NoContactSelected';
+</script>
 

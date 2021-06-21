@@ -25,6 +25,10 @@ namespace TestApp.Web
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/Contact").Include(
+                     "~/Angular/Controller/ContactCtrl.js",
+                     "~/Angular/Service/ContactService.js"));
         }
     }
 }

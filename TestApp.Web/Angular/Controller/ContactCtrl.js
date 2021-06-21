@@ -43,13 +43,13 @@
         //Save Contact Detials
         $scope.SaveContactDetails = function () {
             if (!$scope.regEx.test($scope.ContactDetails.MobileNo)) {
-                toastr.error("Invalid mobile number");
+                toastr.error(InvalidMobileNumber);
                 return;
             }
             ContactService.SaveContactDetails($scope.ContactDetails).then(function (result) {
-                debugger;
+                
                 if (angular.isUndefined(result) || result == null)
-                    toastr.error("Something Went Wrong.");
+                    toastr.error(SomethingWentWrongMessage);
 
                 if (result.MessageType == MessageTypes.Success) {
                     toastr.success(result.Message);
@@ -67,9 +67,9 @@
         $scope.GetContacts = function () {
 
             ContactService.GetContacts($scope.Param).then(function (result) {
-                debugger;
+                
                 if (angular.isUndefined(result) || result == null) {
-                    toastr.error("Something Went Wrong.");
+                    toastr.error(SomethingWentWrongMessage);
                 }
                 else if (angular.isUndefined(result.data) || result.data.MessageType != MessageTypes.Success) {
                     toastr.error(result.data.Message);
@@ -85,9 +85,9 @@
         $scope.GetContactDetails = function (id) {
 
             ContactService.GetContactDetails(id).then(function (result) {
-                debugger;
+                
                 if (angular.isUndefined(result) || result == null) {
-                    toastr.error("Something Went Wrong.");
+                    toastr.error(SomethingWentWrongMessage);
                 }
                 else if (result.data.MessageType == MessageTypes.Warning) {
                     toastr.warning(result.data.Message);
@@ -103,15 +103,14 @@
         }
 
         $scope.DeleteContactDetails = function (id) {
-            debugger;
             if (!(id > 0)) {
-                toastr.error("No Contact Selected");
+                toastr.error(NoContactSelected);
             }
 
             ContactService.DeleteContactDetails(id).then(function (result) {
-                debugger;
+                
                 if (angular.isUndefined(result) || result == null) {
-                    toastr.error("Something Went Wrong");
+                    toastr.error(SomethingWentWrongMessage);
                 }
 
                 if (result.data.MessageType == MessageTypes.Success) {
@@ -128,15 +127,15 @@
         }
 
         $scope.FavouriteContact = function (id, isFavourite) {
-            debugger;
+            
             if (!(id > 0)) {
-                toastr.error("No Contact Selected");
+                toastr.error(NoContactSelected);
             }
 
             ContactService.FavouriteContact(id, isFavourite).then(function (result) {
-                debugger;
+                
                 if (angular.isUndefined(result) || result == null) {
-                    toastr.error("Something Went Wrong");
+                    toastr.error(SomethingWentWrongMessage);
                 }
 
                 if (result.data.MessageType == MessageTypes.Success) {
@@ -153,15 +152,15 @@
         }
 
         $scope.ActiveInactiveContact = function (id, isActive) {
-            debugger;
+            
             if (!(id > 0)) {
                 toastr.error("No Contact Selected");
             }
 
             ContactService.ActiveInactiveContact(id, isActive).then(function (result) {
-                debugger;
+                
                 if (angular.isUndefined(result) || result == null) {
-                    toastr.error("Something Went Wrong");
+                    toastr.error(SomethingWentWrongMessage);
                 }
 
                 if (result.data.MessageType == MessageTypes.Success) {
@@ -205,6 +204,7 @@
 
         //Init
         $scope.Init = function () {
+            console.log(SomethingWentWrongMessage + InvalidMobileNumber + NoContactSelected);
             $scope.GetContacts();
         }
     }

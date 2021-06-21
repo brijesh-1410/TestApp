@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using TestApp.Resource;
 using TestApp.API.Common;
 using TestApp.API.Service;
 using TestApp.API.Models;
@@ -11,16 +12,15 @@ using System.Web.Http.Cors;
 using System.Web.Http;
 using Newtonsoft.Json;
 
+
 namespace TestApp.API.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ContactController : Controller
     {
         private readonly IContactService contactService;
-
         public ContactController()
         {
-
             this.contactService = new ContactService();
         }
 
@@ -65,13 +65,13 @@ namespace TestApp.API.Controllers
                     switch (contactId)
                     {
                         case -1:
-                            existMessage = "Contact Already Exist";
+                            existMessage = AppResources.ContactExistMessage;
                             break;
                         case -2:
-                            existMessage = "EmailId Already Exist";
+                            existMessage = AppResources.EmailExistMessage;
                             break;
                         case -3:
-                            existMessage = "MobileNo Already Exist";
+                            existMessage = AppResources.MobileNoExistMessage;
                             break;
                     }
 
@@ -81,21 +81,21 @@ namespace TestApp.API.Controllers
                     }
                     else if (contactId != null)
                     {
-                        return Json(new Responce() { Message = "Contact Details saved successfully", Data = contactId, MessageType = MessageType.Success });
+                        return Json(new Responce() { Message = AppResources.ContactSaveSuccessMessage, Data = contactId, MessageType = MessageType.Success });
                     }
                     else
                     {
-                        return Json(new Responce() { Message = "Issue while Adding Contact Details", Data = null, MessageType = MessageType.Fail });
+                        return Json(new Responce() { Message = AppResources.ContactSaveIssueMessage, Data = null, MessageType = MessageType.Fail });
                     }
                 }
                 catch (Exception)
                 {
-                    return Json(new Responce() { Message = "Issue while Adding Contact Details", Data = null, MessageType = MessageType.Fail });
+                    return Json(new Responce() { Message = AppResources.ContactSaveIssueMessage, Data = null, MessageType = MessageType.Fail });
                 }
             }
             else
             {
-                return Json(new Responce() { Message = "Invalid Contact Details", Data = null, MessageType = MessageType.Fail });
+                return Json(new Responce() { Message = AppResources.InvalidContactDetailMessage, Data = null, MessageType = MessageType.Fail });
             }
         }
 
@@ -107,16 +107,16 @@ namespace TestApp.API.Controllers
                 bool success = contactService.ActiveInactiveContact(contactId, IsActive);
                 if (success)
                 {
-                    return Json(new Responce() { Message = "Contact " + (IsActive ? "Activated": "De-activated")  + " Successfully.", Data = success, MessageType = MessageType.Success }, JsonRequestBehavior.AllowGet);
+                    return Json(new Responce() { Message = string.Format("{0} {1} {2}",AppResources.Contact, (IsActive ? AppResources.Activated : AppResources.DeActivated), AppResources.Successfully), Data = success, MessageType = MessageType.Success }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    return Json(new Responce() { Message = "Issue while Activating/De-Activating Contact.", Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
+                    return Json(new Responce() { Message = AppResources.ActivationIssueMessage, Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
-                return Json(new Responce() { Message = "Invalid Contact for Activation/De-activation.", Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
+                return Json(new Responce() { Message = AppResources.InvalidContactMessage, Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -128,16 +128,16 @@ namespace TestApp.API.Controllers
                 var contact = contactService.GetContactDetails(contactId);
                 if (contact != null)
                 {
-                    return Json(new Responce() { Message = "Contact details fetched successfully.", Data = contact, MessageType = MessageType.Success }, JsonRequestBehavior.AllowGet);
+                    return Json(new Responce() { Message = AppResources.ContactListFetchSuccessMessage, Data = contact, MessageType = MessageType.Success }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    return Json(new Responce() { Message = "Issue while fetching contact details.", Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
+                    return Json(new Responce() { Message = AppResources.ContactListFetchIssueMessage, Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
-                return Json(new Responce() { Message = "Invalid Contact selected.", Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
+                return Json(new Responce() { Message = AppResources.InvalidContactSelected, Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -149,16 +149,16 @@ namespace TestApp.API.Controllers
                 var contact = contactService.DeleteContactDetails(contactId);
                 if (contact != null)
                 {
-                    return Json(new Responce() { Message = "Contact deleted successfully.", Data = contact, MessageType = MessageType.Success }, JsonRequestBehavior.AllowGet);
+                    return Json(new Responce() { Message = AppResources.ContactDeleteSuccessMessage, Data = contact, MessageType = MessageType.Success }, JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    return Json(new Responce() { Message = "Issue while deleting contact details.", Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
+                    return Json(new Responce() { Message = AppResources.ContactDeleteFailMessage, Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
-                return Json(new Responce() { Message = "Invalid Contact selected.", Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
+                return Json(new Responce() { Message = AppResources.InvalidContactSelected, Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -170,16 +170,16 @@ namespace TestApp.API.Controllers
                 bool success = contactService.FavouriteContact(contactId, IsFavourite);
                 if (success)
                 {
-                    return Json(new Responce() { Message = "Contact " + (IsFavourite ? "Added In" : "Removed From") + "Favourite List Successfully.", Data = success, MessageType = MessageType.Success },JsonRequestBehavior.AllowGet);
+                    return Json(new Responce() { Message = string.Format("{0} {1} {2} {3}", AppResources.Contact, (IsFavourite ? AppResources.AddedIn : AppResources.RemovedFrom), AppResources.FavouriteList, AppResources.Successfully), Data = success, MessageType = MessageType.Success },JsonRequestBehavior.AllowGet);
                 }
                 else
                 {
-                    return Json(new Responce() { Message = "Issue while taking action on Contact.", Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
+                    return Json(new Responce() { Message = AppResources.ContactActionIssueMessage, Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
                 }
             }
             else
             {
-                return Json(new Responce() { Message = "Invalid Contact for Action.", Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
+                return Json(new Responce() { Message = AppResources.ContactActionInvalidMessage, Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
             }
         }
     }
