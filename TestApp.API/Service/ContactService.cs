@@ -109,7 +109,7 @@ namespace TestApp.API.Service
                 _entities.SaveChanges();
                 return contactId;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -131,7 +131,7 @@ namespace TestApp.API.Service
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -156,7 +156,7 @@ namespace TestApp.API.Service
                 }
                 ).FirstOrDefault();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }
@@ -199,7 +199,7 @@ namespace TestApp.API.Service
                     return false;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -210,7 +210,7 @@ namespace TestApp.API.Service
             {
                 return _entities.Contacts.Count();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }

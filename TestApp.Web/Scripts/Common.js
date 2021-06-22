@@ -1,1 +1,1 @@
-﻿const MessageTypes = Object.freeze({ "Success": 1, "Warning": 2, "Fail": 3})
+﻿const MessageTypes = Object.freeze({ "Success": 1, "Warning": 2, "Fail": 3 })

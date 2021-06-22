@@ -39,6 +39,19 @@ namespace TestApp.TestEnv
         }
 
         [Test]
+        public void TestGetContacts()
+        {
+            GridParam param = new GridParam() { pageIndex=1,pageSize=5,orderBy="Asc",orderByField="FirstName",searchString=""};
+            var service = new Mock<IContactService>();
+            List<USP_GetContacts_Result> contacts = new List<USP_GetContacts_Result>();
+            contacts.Add(new USP_GetContacts_Result() { FirstName = "Ankit", LastName = "Patel", MobileNo = "4545454545", EmailId = "df.df@f.com", IsActive = true, IsFavourite = true });
+            service.Setup(m => m.GetContacts(param)).Returns(contacts);
+
+            var result = service.Object.GetContacts(param);
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
         public void TestGetContactDetail()
         {
             int id = 1;

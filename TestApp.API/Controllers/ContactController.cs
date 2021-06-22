@@ -11,7 +11,7 @@ using TestApp.API.Models;
 using System.Web.Http.Cors;
 using System.Web.Http;
 using Newtonsoft.Json;
-
+using TestApp.API.Models.InputModels;
 
 namespace TestApp.API.Controllers
 {
@@ -187,22 +187,6 @@ namespace TestApp.API.Controllers
                 return Json(new Responce() { Message = AppResources.ContactActionInvalidMessage, Data = null, MessageType = MessageType.Fail }, JsonRequestBehavior.AllowGet);
             }
         }
-    }
-
-    public class ContactInput
-    {
-        public int contactId { get; set; }
-        public string firstName { get; set; }
-        public string lastName { get; set; }
-        public string mobileNo { get; set; }
-        public string emailId { get; set; }
-        public Nullable<System.DateTime> entryDate { get; set; }
-        public Nullable<int> countryId { get; set; }
-        public Nullable<int> stateId { get; set; }
-        public Nullable<int> cityId { get; set; }
-        public string address { get; set; }
-        public bool isActive { get; set; }
-        public Nullable<bool> IsFavourite { get; set; }
     }
 
 }

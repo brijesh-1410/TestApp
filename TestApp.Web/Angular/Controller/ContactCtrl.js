@@ -42,7 +42,7 @@
         
         //Save Contact Detials
         $scope.SaveContactDetails = function () {
-            if (!$scope.regEx.test($scope.ContactDetails.MobileNo)) {
+            if (!$scope.regEx.test($scope.ContactDetails.MobileNo) || $scope.ContactDetails.MobileNo.length != 10) {
                 toastr.error(InvalidMobileNumber);
                 return;
             }
@@ -154,7 +154,7 @@
         $scope.ActiveInactiveContact = function (id, isActive) {
             
             if (!(id > 0)) {
-                toastr.error("No Contact Selected");
+                toastr.error(NoContactSelected);
             }
 
             ContactService.ActiveInactiveContact(id, isActive).then(function (result) {
@@ -193,6 +193,7 @@
 
         $scope.EditContact = function (id) {
             $scope.GetContactDetails(id);
+            $scope.ScrollToTop();
         }
 
         $scope.SortBy = function (sortByField) {
@@ -206,6 +207,11 @@
         $scope.Init = function () {
             console.log(SomethingWentWrongMessage + InvalidMobileNumber + NoContactSelected);
             $scope.GetContacts();
+        }
+
+        $scope.ScrollToTop = function() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         }
     }
 })();

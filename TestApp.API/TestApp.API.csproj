@@ -178,6 +178,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DbModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\InputModels\ContactsInput.cs" />
     <Compile Include="Models\StateMaster.cs">
       <DependentUpon>DbModel.tt</DependentUpon>
     </Compile>
