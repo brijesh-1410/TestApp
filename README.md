@@ -11,5 +11,5 @@ Contact Management
 -Use Of common Files and Enums, especially for Responce Type.
 -Database added in saperate Folder(maintain same name of DB).
 -Saperate Resource project added to maintain resource file and use both in Web as well as API project.
--Saperate Tast Project added for test cases using Nunit testing.
+-Saperate Test Project added for test cases using Nunit testing.
 
