@@ -23,7 +23,16 @@ namespace TestApp.API.Service
     }
     public class ContactService : IContactService
     {
-        AppDBEntities _entities = new AppDBEntities();
+        AppDBEntities _entities;
+
+        public ContactService()
+        {
+            _entities = new AppDBEntities();
+        }
+
+        public ContactService(AppDBEntities entities) {
+            _entities = entities;
+        }
 
         public List<Models.USP_GetContacts_Result> GetContacts(GridParam param)
         {

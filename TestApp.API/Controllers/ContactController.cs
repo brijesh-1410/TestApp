@@ -24,6 +24,11 @@ namespace TestApp.API.Controllers
             this.contactService = new ContactService();
         }
 
+        public ContactController(ContactService _contactService)
+        {
+            contactService = _contactService;
+        }
+
         [System.Web.Http.HttpGet]
         public ActionResult GetContacts(string inputParam)
         {
