@@ -9,4 +9,7 @@ Contact Management
 -Manual Functionalty added for Sorting, Searching, Pagination in Table.
 -For Add/Update/Delete/IsActive/IsFavourite operation EF model used with Linq.
 -Use Of common Files and Enums, especially for Responce Type.
--Database added in saperate Folder.
+-Database added in saperate Folder(maintain same name of DB).
+-Saperate Resource project added to maintain resource file and use both in Web as well as API project.
+-Saperate Tast Project added for test cases using Nunit testing.
+
